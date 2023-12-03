@@ -1,21 +1,33 @@
 {% extends 'users/base.html' %}
 {% load crispy_forms_tags%}
 {% block content %}
-<div class="card-body p-5">
+
+<!-- start of date_picker_modules-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{ form.media }}
+<!-- end of date_picker_modules-->
+
     <form action="" method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4 text-center">
-                Join Today
+                <strong>Join today.</strong>
             </legend>
             {{ form|crispy }}
         </fieldset>
-        <div class="form-group">
-            <button class="btn btn-lg btn-block btn-primary" style="background-color: #334bb9;" type="submit">Sign Up</button>
+
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <button class="btn btn-lg btn-primary" type="submit" style="width: 200px;">Sign Up</button>
         </div>
-        <div class="border-top mt-3 pt-5">
-            <small class="text-muted">Already have an account? <a href="#">Login here</a></small>
+        
+        <div class="border-top mt-3 pt-2 text-center" >
+            <div class="text-muted pb-2">
+                <small>Already have an account?</small>
+            </div>
+            <div>
+                <a class="btn btn-sm btn-outline-secondary" href="{% url 'user-login' %}"><strong>Login here</strong></a>
+            </div>
         </div>
     </form>
-  </div>
 {% endblock content %}
+

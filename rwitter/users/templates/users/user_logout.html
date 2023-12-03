@@ -1,8 +1,19 @@
 {% extends 'users/base.html' %}
 {% block content%}
 
-<p class="alert alert-info">You have been successfully logged out!</p>
+<div>
+    <p class="alert alert-info text-center">You have successfully logged out. See you soon...</p>
+</div>
 
-<p><a href="{% url 'user-login' %}">Click to Login Again</a></p>
+<div class="border-top mt-3 pt-2 text-center" >
+    <div class="text-muted pb-2">
+        <small>Where to next?</small>
+    </div>
+    
+    <div class="">
+        <a class="btn btn-sm btn-outline-primary" href="{% url 'tweets-home' %}"><strong>Go to Rwitter</strong></a>
+        <a class="btn btn-sm btn-outline-secondary" href="{% url 'user-login' %}"><strong>Login again</strong></a>
+    </div>
+</div>
 
 {% endblock content%}
