@@ -1,0 +1,8 @@
+{% extends 'users/base.html' %}
+{% block content%}
+
+<p class="alert alert-info">You have been successfully logged out!</p>
+
+<p><a href="{% url 'user-login' %}">Click to Login Again</a></p>
+
+{% endblock content%}
