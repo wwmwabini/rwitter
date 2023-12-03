@@ -1,60 +1,59 @@
 {% extends 'tweets/base.html' %}
 {% block content%}
 
- <!-- tweetbox starts -->
- <div class="tweetBox">
-    <form>
-      <div class="tweetbox__input">
-        <div class="">
-            <img src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png" alt="" />
-        </div>
-        <div class="form-group shadow-textarea mx-4">
-            <textarea class="form-control z-depth-1 cols=40" placeholder="What's happening?"></textarea>
-        </div>
+  <section class="">
+    <!-- feed starts -->
+    <div class="">
+      <div class="">
+        <form action="" method="POST">
+          <div class="input-group">
+            <div class="">
+              <span class="input-group-addon">
+                <img style="height: 40px; border-radius: 50%;" src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png" alt="@username" />
+              </span>
+            </div>
+            <div class="">
+              <input type="text" class="form-control" style="max-width: fit-content;" placeholder="What is happening?" />
+            </div>
+          </div>
+          <div class="border-top p-3 mb-5">
+            <button class="btn btn-primary btn-sm float-end rounded-4 m-1">Post</button>
+          </div>
+        </form>
       </div>
-      <button class="tweetBox__tweetButton">Tweet</button>
-    </form>
-  </div>
-  <!-- tweetbox ends -->
 
-  <!-- posts starts -->
-  <div class="post">
-    <div class="post__avatar">
-      <img
-        src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png"
-        alt=""
-      />
-    </div>
-
-    <div class="post__body">
-      <div class="post__header">
-        <div class="post__headerText">
-          <h3>
-            Somanath Goudar
-            <span class="post__headerSpecial">
-                <span class="material-icons post__badge"> verified </span>
-                @somanathg
-            </span>
-          </h3>
+    <!-- posts starts -->
+    <div class="list-group list-group-flush border-bottom scrollarea container">
+  
+      <a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
+        <div class="align-items-center">
+          <strong>Wallace Mwabini</strong> <span class="ml-2">@wallacemwabini</span> &#8226; <span class="ml-2">3rd Dec 2023</span>
+          <span class="float-end"><i class="bi bi-three-dots"></i></span>
         </div>
         <div class="post__headerDescription">
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+          <p class="">
+            How to Deploy a flask app on Ubuntu 20.04 using Passenger Standalone https://artsysops.com/2021/03/25/deploy-a-flask-app-on-ubuntu-20-04-passenger-standalone/ 
+            #pythonprogramming 
+            @artsysops
+          </p>
+          <div>
+            <img src="https://www.focus2move.com/wp-content/uploads/2020/01/Tesla-Roadster-2020-1024-03.jpg" width="500" height="300"/>
+          </div>
         </div>
-      </div>
-      <img
-        src="https://www.focus2move.com/wp-content/uploads/2020/01/Tesla-Roadster-2020-1024-03.jpg"
-        alt=""
-      />
-      <div class="post__footer">
-        <span class="material-icons"> insert_comment </span>
-        <span class="material-icons"> repeat </span>
-        <span class="material-icons"> favorite_border </span>
-      </div>
+      </a>
+  
     </div>
+    <div class="">
+      <span><i class="bi bi-chat"></i></span>
+      <span><i class="bi bi-repeat"></i></span>
+      <span><i class="bi bi-heart"></i></span>
+      <span><i class="bi bi-bar-chart"></i></span>
+    </div>
+    <!-- post ends -->
   </div>
-  <!-- post ends -->
-</div>
-<!-- feed ends -->
+  <!-- feed ends -->
+  </section>
+  
 
 
 {% endblock content%}
