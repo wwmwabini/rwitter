@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .forms import RegisterForm
 from .models import UserProfile 
-import os
 
 def register(request):
     if request.method == "POST":
@@ -24,3 +23,14 @@ def register(request):
         form = RegisterForm()
     return render(request, 'users/user_register.html', {'form': form})
 
+
+def profile(request):
+
+    user = User.objects.get(username='ray')
+
+    context = {
+        'user': user,
+        'title': 'Account Profile'
+    }
+
+    return render(request, 'users/user_profile.html', context)
