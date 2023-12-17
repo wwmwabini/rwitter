@@ -1,0 +1,355 @@
+{% extends 'tweets/base.html' %}
+{% block content%}
+<!--========Timeline ========-->
+<div class="col-12 col-lg-6">
+  <div class="d-flex flex-column mx-auto justify-content-center w-100 container-fluid overflow-hidden" style="max-width: 680px">
+    <!--== Stories ==-->
+    <div class="d-flex align-items-center justify-content-between mt-3 position-relative">
+      <!-- Story1 mystory -->
+      <div class="mx-1 bg-white rounded story" style="width: 6em; height: 190px">
+        <img src="https://source.unsplash.com/collection/happy-people" class="card-img-top object-fit-cover rounded-1" style="min-height: 125px" alt="story post" />
+        <div class="d-flex align-items-center justify-content-center position-relative" style="min-height: 65px">
+          <p class="mb-0 fs-7 fw-bold">Create Story</p>
+          <div class="position-absolute top-0 start-50 translate-middle">
+            <i class="fas fa-plus-circle p-1 bg-white rounded-circle fs-3 text-primary"></i>
+          </div>
+        </div>
+      </div>
+      <!-- Story2 -->
+      <div class="mx-1 bg-white rounded story" style="width: 6em; height: 190px">
+        <img src="https://source.unsplash.com/random/5" class="card-img-top object-fit-cover rounded-1" style="min-height: 190px" alt="story post" />
+      </div>
+      <!-- Story3 -->
+      <div class="mx-1 bg-white rounded story" style="width: 6em; height: 190px">
+        <img src="https://source.unsplash.com/random/6" class="card-img-top object-fit-cover rounded-1" style="min-height: 190px" alt="story post" />
+      </div>
+      <!-- Story4 -->
+      <div class="mx-1 bg-white rounded story" style="width: 6em; height: 190px">
+        <img src="https://source.unsplash.com/random/7" class="card-img-top object-fit-cover rounded-1" style="min-height: 190px" alt="story post" />
+      </div>
+      <!-- Story5 -->
+      <div class="mx-1 bg-white rounded d-none d-lg-block story" style="width: 6em; height: 190px">
+        <img src="https://source.unsplash.com/random/8" class="card-img-top object-fit-cover rounded-1" style="min-height: 190px" alt="story post" />
+      </div>
+      <!-- Story6 -->
+      <div class="mx-1 bg-white rounded d-none d-lg-block story" style="width: 6em; height: 190px">
+        <img src="https://source.unsplash.com/random/9" class="card-img-top object-fit-cover rounded-1" style="min-height: 190px" alt="story post" />
+      </div>
+      <!-- next icon -->
+      <div class="position-absolute top-50 start-100 translate-middle d-none d-lg-block">
+        <i class="fas fa-arrow-right p-3 border text-muted bg-white rounded-circle"></i>
+      </div>
+    </div>
+    <!--== Create post ==-->
+    <div class="bg-white w-100 p-3 mt-3">
+      <!-- avatar -->
+      <div class="d-flex" type="button">
+        <img src="https://source.unsplash.com/collection/happy-people" alt="avatar" class="object-fit-cover rounded-circle me-2" style="width: 38px; height: 38px" />
+        <input type="text" class="form-control mx-1 rounded-pill bg-grey border-0 py-2" placeholder="What's on your mind, Sajib?" disabled data-bs-toggle="modal" data-bs-target="#createModal" />
+      </div>
+      <hr />
+      <!-- action -->
+      <div class="d-flex flex-column flex-lg-row mt-3">
+        <!-- a 1 -->
+        <div class="dropdown-item rounded d-flex align-items-center justify-content-center my-1" type="button">
+          <i class="fas fa-video me-2 text-danger"></i>
+          <p class="m-0 text-muted">Live Video</p>
+        </div>
+        <!-- a 2 -->
+        <div class="dropdown-item rounded d-flex align-items-center justify-content-center my-1" type="button">
+          <i class="fas fa-photo-video me-2 text-success"></i>
+          <p class="m-0 text-muted">Photo/Video</p>
+        </div>
+        <!-- a 3 -->
+        <div class="dropdown-item rounded d-flex align-items-center justify-content-center my-1" type="button">
+          <i class="fas fa-smile me-2 text-warning"></i>
+          <p class="m-0 text-muted">Feeling/Activity</p>
+        </div>
+      </div>
+    </div>
+    <!--== Create Room ==-->
+    <div class="mx-1 bg-white p-3 mt-3 rounded border shadow row">
+      <!-- button -->
+      <div class="col-4">
+        <button class="btn rounded-pill btn-info fs-6"> <i class="fas fa-video me-lg-2"></i><span class="d-none d-lg-inline-block">Create Room</span> </button>
+      </div>
+
+      <!-- slider mobile -->
+      <div class="col-8 d-xl-none text-end">
+        <img src="https://source.unsplash.com/random/1" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+        <img src="https://source.unsplash.com/random/2" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+        <img src="https://source.unsplash.com/random/3" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+        <img src="https://source.unsplash.com/random/4" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+      </div>
+      <!-- slider desktop -->
+      <div class="col-8 d-none d-xl-block position-relative" style="max-width: 450px">
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner text-center">
+            <div class="carousel-item active">
+              <img src="https://source.unsplash.com/random/1" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+              <img src="https://source.unsplash.com/random/2" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+              <img src="https://source.unsplash.com/random/3" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+              <img src="https://source.unsplash.com/random/4" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+              <img src="https://source.unsplash.com/random/5" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+              <img src="https://source.unsplash.com/random/6" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+              <img src="https://source.unsplash.com/random/7" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+            </div>
+            <div class="carousel-item">
+              <img src="https://source.unsplash.com/random/1" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+              <img src="https://source.unsplash.com/random/2" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+              <img src="https://source.unsplash.com/random/3" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+              <img src="https://source.unsplash.com/random/4" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+              <img src="https://source.unsplash.com/random/5" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+              <img src="https://source.unsplash.com/random/6" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+              <img src="https://source.unsplash.com/random/7" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+            </div>
+          </div>
+        </div>
+        <!-- slider btn prev -->
+        <div class="position-absolute start-0 top-50 translate-middle d-none d-xl-block" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <div class="p-2 bg-white border rounded-circle d-flex justify-content-center align-items-center pointer story" style="width: 30px; height: 30px">
+            <i class="fas fa-chevron-left text-muted"></i>
+          </div>
+        </div>
+        <!-- slider btn next -->
+        <div class="position-absolute start-100 top-50 translate-middle d-none d-xl-block" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <div class="p-2 bg-white border rounded-circle d-flex justify-content-center align-items-center pointer story" style="width: 30px; height: 30px">
+            <i class="fas fa-chevron-right text-muted"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--== Posts ==-->
+    <div>
+      <!-- own post 1 -->
+      <div class="bg-white p-4 rounded shadow mt-3">
+        <!-- author -->
+        <div class="d-flex justify-content-between">
+          <!-- avatar -->
+          <div class="d-flex">
+            <img src="https://source.unsplash.com/collection/happy-people" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+            <div>
+              <p class="m-0 fw-bold">Sajib</p>
+              <span class="text-muted fs-7">March 17 at 1:23 pm</span>
+            </div>
+          </div>
+          <!-- edit -->
+          <i class="fas fa-ellipsis-h" type="button" id="post1Menu" data-bs-toggle="dropdown" aria-expanded="false"></i>
+          <!-- edit menu -->
+          <ul class="dropdown-menu border-0 shadow" aria-labelledby="post1Menu">
+            <li class="d-flex align-items-center">
+              <a class="dropdown-item d-flex justify-content-around align-items-center fs-7" href="#"> Edit Post</a>
+            </li>
+            <li class="d-flex align-items-center">
+              <a class="dropdown-item d-flex justify-content-around align-items-center fs-7" href="#"> Delete Post</a>
+            </li>
+          </ul>
+        </div>
+        <!-- post content -->
+        <div class="mt-3">
+          <!-- content -->
+          <div>
+            <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae fuga incidunt consequatur tenetur doloremque officia corrupti provident tempore vitae labore? </p>
+            <img src="https://source.unsplash.com/random/12" alt="post image" class="w-100 rounded" style="max-height: 400px; object-fit: cover" />
+          </div>
+          <!-- likes & comments -->
+          <div class="mt-3 position-relative">
+            <!-- likes -->
+            <div class="d-flex align-items-center top-0 start-0" style="height: 50px; z-index: 5">
+              <div class="me-2">
+                <i class="text-primary fas fa-thumbs-up"></i>
+                <i class="text-danger fab fa-gratipay"></i>
+                <i class="text-warning fas fa-grin-squint"></i>
+              </div>
+              <p class="p m-0 text-muted fs-7">sajib, mehedi, and 3 others</p>
+            </div>
+            <!-- comments start-->
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item border-0">
+                <!-- comment collapse -->
+                <h2 class="accordion-header" id="headingTwo">
+                  <div class="accordion-button collapsed pointer d-flex justify-content-end" data-bs-toggle="collapse" data-bs-target="#collapsePost1" aria-expanded="false" aria-controls="collapsePost1">
+                    <p class="m-0 d-none d-lg-block">2 Comments</p>
+                  </div>
+                </h2>
+                <hr />
+                <!-- comment & like bar -->
+                <div class="d-flex justify-content-around">
+                  <div class="dropdown-item rounded d-flex justify-content-center align-items-center pointer text-muted p-1">
+                    <i class="fas fa-thumbs-up me-3"></i>
+                    <p class="m-0">Like</p>
+                  </div>
+                  <div class="dropdown-item rounded d-flex justify-content-center align-items-center pointer text-muted p-1" data-bs-toggle="collapse" data-bs-target="#collapsePost1" aria-expanded="false" aria-controls="collapsePost1">
+                    <i class="fas fa-comment-alt me-3"></i>
+                    <p class="m-0">Comment</p>
+                  </div>
+                </div>
+                <!-- comment expand -->
+                <div id="collapsePost1" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                  <hr />
+                  <div class="accordion-body">
+                    <!-- comment 1 -->
+                    <div class="d-flex align-items-center my-1">
+                      <!-- avatar -->
+                      <img src="https://source.unsplash.com/collection/happy-people" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+                      <!-- comment text -->
+                      <div class="p-3 rounded comment__input w-100">
+                        <!-- comment menu of author -->
+                        <div class="d-flex justify-content-end">
+                          <!-- icon -->
+                          <i class="fas fa-ellipsis-h text-blue pointer" id="post1CommentMenuButton" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                          <!-- menu -->
+                          <ul class="dropdown-menu border-0 shadow" aria-labelledby="post1CommentMenuButton">
+                            <li class="d-flex align-items-center">
+                              <a class="dropdown-item d-flex justify-content-around align-items-center fs-7" href="#"> Edit Comment</a>
+                            </li>
+                            <li class="d-flex align-items-center">
+                              <a class="dropdown-item d-flex justify-content-around align-items-center fs-7" href="#"> Delete Comment</a>
+                            </li>
+                          </ul>
+                        </div>
+                        <p class="fw-bold m-0">John</p>
+                        <p class="m-0 fs-7 bg-gray p-2 rounded"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                      </div>
+                    </div>
+                    <!-- comment 2 -->
+                    <div class="d-flex align-items-center my-1">
+                      <!-- avatar -->
+                      <img src="https://source.unsplash.com/random/2" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+                      <!-- comment text -->
+                      <div class="p-3 rounded comment__input w-100">
+                        <p class="fw-bold m-0">Jerry</p>
+                        <p class="m-0 fs-7 bg-gray p-2 rounded"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                      </div>
+                    </div>
+                    <!-- create comment -->
+                    <form class="d-flex my-1">
+                      <!-- avatar -->
+                      <div>
+                        <img src="https://source.unsplash.com/collection/happy-people" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+                      </div>
+                      <!-- input -->
+                      <input type="text" class="form-control border-0 rounded-pill bg-gray" placeholder="Write a comment" />
+                    </form>
+                    <!-- end -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end -->
+          </div>
+        </div>
+      </div>
+      <!-- other user post 1 -->
+      <div class="bg-white p-4 rounded shadow mt-3">
+        <!-- author -->
+        <div class="d-flex justify-content-between">
+          <!-- avatar -->
+          <div class="d-flex">
+            <img src="https://source.unsplash.com/random/7" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+            <div>
+              <p class="m-0 fw-bold">Stone</p>
+              <span class="text-muted fs-7">Jan 17 at 1:23 pm</span>
+            </div>
+          </div>
+        </div>
+        <!-- post content -->
+        <div class="mt-3">
+          <!-- content -->
+          <div>
+            <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae fuga incidunt consequatur tenetur doloremque officia corrupti provident tempore vitae labore? </p>
+            <img src="https://source.unsplash.com/random/13" alt="post image" class="w-100 rounded" style="max-height: 400px; object-fit: cover" />
+          </div>
+          <!-- likes & comments -->
+          <div class="post__comment mt-3 position-relative">
+            <!-- likes -->
+            <div class="d-flex align-items-center top-0 start-0 position-absolute" style="height: 50px; z-index: 5">
+              <div class="me-2">
+                <i class="text-primary fas fa-thumbs-up"></i>
+                <i class="text-danger fab fa-gratipay"></i>
+                <i class="text-warning fas fa-grin-squint"></i>
+              </div>
+              <p class="m-0 text-muted fs-7">sajib, mehedi, and 3 others</p>
+            </div>
+            <!-- comments start-->
+            <div class="accordion" id="accordionExample2">
+              <div class="accordion-item border-0">
+                <!-- comment collapse -->
+                <h2 class="accordion-header" id="headingThree">
+                  <div class="accordion-button collapsed pointer d-flex justify-content-end" data-bs-toggle="collapse" data-bs-target="#collapsePost2" aria-expanded="false" aria-controls="collapsePost2">
+                    <p class="m-0 d-none d-lg-block">2 Comments</p>
+                  </div>
+                </h2>
+                <hr />
+                <!-- comment & like bar -->
+                <div class="d-flex justify-content-around">
+                  <div class="dropdown-item rounded d-flex justify-content-center align-items-center pointer text-muted p-1">
+                    <i class="fas fa-thumbs-up me-3"></i>
+                    <p class="m-0">Like</p>
+                  </div>
+                  <div class="dropdown-item rounded d-flex justify-content-center align-items-center pointer text-muted p-1" data-bs-toggle="collapse" data-bs-target="#collapsePost2" aria-expanded="false" aria-controls="collapsePost2">
+                    <i class="fas fa-comment-alt me-3"></i>
+                    <p class="m-0">Comment</p>
+                  </div>
+                </div>
+                <!-- comment expand -->
+                <div id="collapsePost2" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample2">
+                  <hr />
+                  <div class="accordion-body">
+                    <!-- comment 1 -->
+                    <div class="d-flex align-items-center my-1">
+                      <!-- avatar -->
+                      <img src="https://source.unsplash.com/collection/happy-people" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+                      <!-- comment text -->
+                      <div class="p-3 rounded comment__input w-100">
+                        <!-- comment menu of author -->
+                        <div class="d-flex justify-content-end">
+                          <!-- icon -->
+                          <i class="fas fa-ellipsis-h text-blue pointer" id="post2CommentMenuButton" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                          <!-- menu -->
+                          <ul class="dropdown-menu border-0 shadow" aria-labelledby="post2CommentMenuButton">
+                            <li class="d-flex align-items-center">
+                              <a class="dropdown-item d-flex justify-content-around align-items-center fs-7" href="#"> Edit Comment</a>
+                            </li>
+                            <li class="d-flex align-items-center">
+                              <a class="dropdown-item d-flex justify-content-around align-items-center fs-7" href="#"> Delete Comment</a>
+                            </li>
+                          </ul>
+                        </div>
+                        <p class="fw-bold m-0">John</p>
+                        <p class="m-0 fs-7 bg-gray p-2 rounded"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                      </div>
+                    </div>
+                    <!-- comment 2 -->
+                    <div class="d-flex align-items-center my-1">
+                      <!-- avatar -->
+                      <img src="https://source.unsplash.com/random/2" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+                      <!-- comment text -->
+                      <div class="p-3 rounded comment__input w-100">
+                        <p class="fw-bold m-0">Jerry</p>
+                        <p class="m-0 fs-7 bg-gray p-2 rounded"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                      </div>
+                    </div>
+                    <!-- create comment -->
+                    <form class="d-flex my-1">
+                      <!-- avatar -->
+                      <div>
+                        <img src="https://source.unsplash.com/collection/happy-people" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+                      </div>
+                      <!-- input -->
+                      <input type="text" class="form-control border-0 rounded-pill bg-gray" placeholder="Write a comment" />
+                    </form>
+                    <!-- end -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end -->
+          </div>
+        </div>
+      </div>
+      <!-- own post 2 -->
+    </div>
+  </div>
+</div>
+{% endblock content%}
