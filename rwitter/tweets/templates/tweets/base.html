@@ -26,7 +26,9 @@
             <div class="col">
               <div class="d-flex align-items-center">
                 <!-- icon -->
-                <i class="fa-brands fa-linux text-primary mx-2" style="font-size: 3rem"></i>
+                <a class="btn px-3" href="{% url 'tweets-home'%}">
+                  <i class="fa-brands fa-linux text-primary mx-2" style="font-size: 3rem"></i>
+                </a>
                 <!-- search -->
                 <div class="input-group" type="button">
                   <!-- search Desktop -->
@@ -68,9 +70,9 @@
             <div class="d-none col d-xl-flex align-items-center justify-content-center">
               <!-- home -->
               <div class="mx-4 nav-btn navBtn-active">
-                <button class="btn px-3">
+                <a class="btn px-3" href="{% url 'tweets-home'%}">
                   <i class="fa-solid fa-home fs-4 text-muted"></i>
-                </button>
+                </a>
               </div>
               <!-- stores -->
               <div class="mx-4 nav-btn">
