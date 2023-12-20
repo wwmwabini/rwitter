@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -48,19 +49,25 @@
                   <ul class="dropdown-menu overflow-auto p-3 shadow" style="width: 20em; max-height: 600px">
                     <!-- search box -->
                     <li>
-                      <input type="text" class="bg-grey border-0 text-muted py-1 px-3 rounded-pill w-100" placeholder="Search Rwitter...." autofocus />
+                      <form method="POST" action="">
+                        {% csrf_token %}
+                        {{ form1 | crispy }}
+                      </form>
+                    
                     </li>
                     <!-- search1 history-->
+                    {% for result in search_history %}
                     <li>
                       <div class="alert dropdown-item d-flex justify-content-between align-items-center my-3">
                         <div class="d-flex align-items-center justify-content-center">
-                          <p class="my-auto">Arteta ffp rules</p>
+                          <p class="my-auto">{{result}}</p>
                         </div>
                         <div>
                           <button class="btn btn-close" data-bs-dismiss="alert"></button>
                         </div>
                       </div>
                     </li>
+                    {% endfor %}
                   </ul>
                   <!-- dd end -->
                 </div>
