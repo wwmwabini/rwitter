@@ -53,14 +53,24 @@
                         {% csrf_token %}
                         {{ form1 | crispy }}
                       </form>
-                    
                     </li>
                     <!-- search1 history-->
+                    <div class="float-end">
+                      <form method="POST" action="">
+                        {% csrf_token %}
+                        <button class="btn btn-sm btn-outline-danger" name="clearall" value="clearall" type="submit">Clear all</button>
+                      </form>
+                    </div>
+                    <h2>Recent</h2>
                     {% for result in search_history %}
                     <li>
                       <div class="alert dropdown-item d-flex justify-content-between align-items-center my-3">
                         <div class="d-flex align-items-center justify-content-center">
-                          <p class="my-auto">{{result}}</p>
+                          <form method="POST" action="">
+                            {% csrf_token %}
+                            <button class="btn btn-link my-auto" name="searchterm" value="{{result}}" type="submit">{{result}}</button>
+                          </form>
+                          
                         </div>
                         <div>
                           <button class="btn btn-close" data-bs-dismiss="alert"></button>

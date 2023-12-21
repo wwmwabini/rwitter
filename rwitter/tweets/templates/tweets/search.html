@@ -1,0 +1,21 @@
+{% extends 'tweets/base.html' %}
+{% block content%}
+
+<div class="col-12 col-lg-6">
+    <div class="d-flex flex-column mx-auto justify-content-center w-100 container-fluid overflow-hidden" style="max-width: 680px">
+      <!--== Stories ==-->
+      <div class="d-flex align-items-center justify-content-between mt-3 position-relative">
+        {% if results %}
+            {% for result in results %}
+                {{result}}
+            {% endfor %}
+        {% else %}
+            <h2>There are no results for "<i>{{searchterm}}</i>"</h2>
+        {% endif %}
+      </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}
