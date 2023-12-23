@@ -2,12 +2,18 @@ from django.shortcuts import render, redirect
 from .forms import SearchHistoryForm
 from .models import SearchHistory
 from users.models import UserProfile
+from django.contrib.auth.models import User 
 from django.db.models import Q
 from django.utils import timezone
 
 
 def do_search(searchterm):
-    results = UserProfile.objects.filter(website__icontains=searchterm).all()
+    # search users, usersprofile table: columns username, bio
+    # search posts: column content, 
+    results = User.objects.filter(username__icontains=searchterm).all()
+
+    for result in results:
+        print(result)
 
     return results
 

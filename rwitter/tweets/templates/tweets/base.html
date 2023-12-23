@@ -51,7 +51,10 @@
                     <li>
                       <form method="POST" action="">
                         {% csrf_token %}
-                        {{ form1 | crispy }}
+                        <div id="div_id_searchterm" class="mb-3"> 
+                          <label for="id_searchterm" class="form-label">Search Rwitter</label> 
+                          <input type="text" name="searchterm" placeholder="Try search a username, post or trend." maxlength="512" class="textinput form-control" id="id_searchterm"> 
+                        </div>
                       </form>
                     </li>
                     <!-- search1 history-->
@@ -68,7 +71,7 @@
                         <div class="d-flex align-items-center justify-content-center">
                           <form method="POST" action="">
                             {% csrf_token %}
-                            <button class="btn btn-link my-auto" name="searchterm" value="{{result}}" type="submit">{{result}}</button>
+                            <button class="btn btn-link my-auto" style="text-decoration: none;" name="searchterm" value="{{result}}" type="submit">{{result}}</button>
                           </form>
                           
                         </div>

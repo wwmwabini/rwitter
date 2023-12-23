@@ -4,13 +4,26 @@
 <div class="col-12 col-lg-6">
     <div class="d-flex flex-column mx-auto justify-content-center w-100 container-fluid overflow-hidden" style="max-width: 680px">
       <!--== Stories ==-->
-      <div class="d-flex align-items-center justify-content-between mt-3 position-relative">
+      <div class="">
         {% if results %}
-            {% for result in results %}
-                {{result}}
+        {% for result in results %}
+                <div class="card card-body col-sm-10 py-2 m-3">
+                    <img src="{{ result.userprofile.photo.url }}" alt="avatar" class="rounded-circle me-2" style="width: 45px; height: 45px; object-fit: cover" />
+                    <div>
+                    <p class="m-0 lead">{{result.first_name}} {{result.last_name}}</p>
+                    <p class="m-0 fw-bold">{{result.username}}</p>
+                    <span class="text-muted fs-7">{{result.userprofile.bio}}</span>
+                    </div>
+                </div>
             {% endfor %}
         {% else %}
+        <div>
             <h2>There are no results for "<i>{{searchterm}}</i>"</h2>
+        </div>
+        <div>
+            <p class="lead">Try searching for a username, post or a shorter word</p>
+        </div>
+                  
         {% endif %}
       </div>
     </div>

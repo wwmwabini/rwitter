@@ -25,7 +25,7 @@ class UserProfile(models.Model):
     def __str__(self):
         return f'{self.user.username} - {self.user.email}' 
     
-    def save(self):
+    def save(self, *args, **kwargs):
         super().save()
         photo_name = random_photo_name(self)
         photo_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), default_profile_image_folder, photo_name)
