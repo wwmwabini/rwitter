@@ -3,15 +3,18 @@ import secrets, os
 from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
+from rwitter.functions import random_photo_name
 
 default_profile_image_folder = 'media/images/profile_pics'
 
+"""
 def random_photo_name(self):
     _, photo_extension = os.path.splitext(self.photo.path)
     photo_filename = secrets.token_hex(12) + photo_extension
     print("Random photo name", photo_filename)
 
     return photo_filename
+"""
 
 
 class UserProfile(models.Model):

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import SearchHistoryForm
-from .models import SearchHistory
+from .models import SearchHistory, Post
 from users.models import UserProfile
 from django.contrib.auth.models import User 
 from django.db.models import Q
@@ -82,8 +82,14 @@ def home(request):
             search_history = SearchHistory.objects.order_by('-created_at').values_list('searchterm', flat=True)[:5]
         
 
+
+    # Posts
+
+    posts = Post.objects.all()
+
     context = {
         'form1': form1,
+        'posts': posts,
         'search_history': search_history
     }
 
