@@ -1,10 +1,17 @@
+from typing import Optional
+from django.forms.models import BaseModelForm
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import SearchHistoryForm
 from .models import SearchHistory, Post
+
 from users.models import UserProfile
 from django.contrib.auth.models import User 
 from django.db.models import Q
 from django.utils import timezone
+
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import CreateView, UpdateView, DeleteView
 
 
 def do_search(searchterm):
@@ -85,7 +92,9 @@ def home(request):
 
     # Posts
 
-    posts = Post.objects.all()
+    posts = Post.objects.all().order_by('-created_at')
+
+
 
     context = {
         'form1': form1,
@@ -95,6 +104,44 @@ def home(request):
 
 
     return render(request, 'tweets/feed.html', context)
+
+
+
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    template="tweets/feed.html"
+    fields = ['content']
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Post
+    fields = ['content']
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.user:
+            return True
+        return False
+    
+
+class PostDeleteView(LoginRequiredMixin, DeleteView):
+    model = Post
+    success_url = "/"
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.user:
+            return True
+        return False
+
 
 
 def searchresults(request):

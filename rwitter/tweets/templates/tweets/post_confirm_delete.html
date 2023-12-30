@@ -1,0 +1,21 @@
+{% extends 'tweets/base.html' %}
+{% block content%}
+
+<div class="col-12 col-lg-6">
+    <div class="d-flex flex-column mx-auto justify-content-center w-100 container-fluid overflow-hidden" style="max-width: 680px">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Delete Post</legend>
+                <p class="lead">You are about to delete a post. This action is irreversible. Are you sure you want to delete post "{{ post.id}}"</p>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-danger" type="submit">Yes, Delete</button>
+                <a class="btn btn-secondary" href="{% url 'tweets-home' %}">No, Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock content %}
