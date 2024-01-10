@@ -118,12 +118,13 @@
                 </button>
               </div>
             </div>
+            {% if user.is_authenticated %}
             <!-- menus col -->
             <div class="col d-flex align-items-center justify-content-end">
               <!-- avatar -->
               <div class="d-none d-lg-flex align-items-center justify-content-center">
                 <img class="object-fit-cover rounded-circle me-2" src={{user.userprofile.photo.url}} alt="avatar" width="38px" height="38px" />
-                <p class="my-auto">{{user.username}}</p>
+                <p class="my-auto"><strong>Hi, {{user.first_name}}</strong></p>
               </div>
               <!-- main menu -->
               <div>
@@ -683,29 +684,30 @@
                   <i class="fa-solid fa-chevron-down object-fit-cover" alt="menu"></i>
                 </div>
                 <!-- Secondary menu dd -->
+                
                 <ul class="dropdown-menu overflow-auto border-0 p-3 shadow" style="width: 23em; max-height: 600px">
                   <!-- profile -->
                   <li class="my-3">
                     <a class="dropdown-item text-decoration-none d-flex align-items-center text-dark" href="#">
                       <div class="me-2">
-                        <img src="https://source.unsplash.com/random/1" alt="" class="object-fit-cover rounded-circle" width="48px" height="48px" />
+                        <img src="{{user.userprofile.photo.url}}" alt="" class="object-fit-cover rounded-circle" width="48px" height="48px" />
                       </div>
                       <div class="p-1">
-                        <p class="m-0 fw-bold">Sajib</p>
-                        <span class="text-muted">See your profile</span>
+                        <p class="m-0 fw-bold">{{user.first_name}} {{user.last_name}}</p>
+                        <span class="text-muted">@{{user.username}}</span>
                       </div>
                     </a>
                   </li>
                   <hr />
                   <!-- feedback -->
                   <li class="my-3">
-                    <a class="dropdown-item text-decoration-none d-flex align-items-center text-dark" href="#">
+                    <a class="dropdown-item text-decoration-none d-flex align-items-center text-dark" href="{% url 'tweets-feedback' %}">
                       <div class="py-1 px-2 bg-grey rounded-circle me-2">
                         <i class="fa-solid fa-circle-exclamation"></i>
                       </div>
                       <div class="p-2">
                         <p class="m-0">Give Feedback</p>
-                        <span class="fs-7 text-muted">Help us improve the new Flexbook</span>
+                        <span class="fs-7 text-muted">Help us improve the new Rwitter</span>
                       </div>
                     </a>
                   </li>
@@ -724,7 +726,7 @@
                     <!-- dd -->
                     <ul class="dropdown-menu">
                       <li>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <a class="dropdown-item d-flex align-items-center" href="{% url 'user-profile' %}">
                           <div class="rounded-circle p-1 bg-gray d-flex align-items-center justify-content-center me-2" style="width: 38px; height: 38px">
                             <i class="fas fa-cog"></i>
                           </div>
@@ -736,15 +738,7 @@
                           <div class="rounded-circle p-1 bg-gray d-flex align-items-center justify-content-center me-2" style="width: 38px; height: 38px">
                             <i class="fas fa-lock"></i>
                           </div>
-                          <p class="m-0">Privacy Checkup</p>
-                        </a>
-                      </li>
-                      <li>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                          <div class="rounded-circle p-1 bg-gray d-flex align-items-center justify-content-center me-2" style="width: 38px; height: 38px">
-                            <i class="fas fa-unlock-alt"></i>
-                          </div>
-                          <p class="m-0">Privacy Shortcuts</p>
+                          <p class="m-0">Privacy Center</p>
                         </a>
                       </li>
                       <li>
@@ -912,6 +906,7 @@
                 <!-- dd end -->
               </div>
             </div>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -1007,7 +1002,7 @@
                 <!-- msg sender 1 -->
                 <li class="d-flex">
                   <div class="me-2">
-                    <img src="https://source.unsplash.com/random/1" alt="" width="25px" height="25px" class="rounded-circle" />
+                    <img src="{{post.user.userprofile.photo.url}}" alt="" width="25px" height="25px" class="rounded-circle" />
                   </div>
                   <div>
                     <p class="bg-grey py-1 px-2 rounded-3">Lorem, ipsum dolor</p>
@@ -1019,13 +1014,13 @@
                     <p class="bg-grey py-1 px-2 rounded-3">Lorem, ipsum dolor</p>
                   </div>
                   <div>
-                    <img src="https://source.unsplash.com/random/2" alt="" width="25px" height="25px" class="rounded-circle" />
+                    <img src="{{post.user.userprofile.photo.url}}" alt="" width="25px" height="25px" class="rounded-circle" />
                   </div>
                 </li>
                 <!-- msg sender 1 -->
                 <li class="d-flex">
                   <div class="me-2">
-                    <img src="https://source.unsplash.com/random/1" alt="" width="25px" height="25px" class="rounded-circle" />
+                    <img src="{{post.user.userprofile.photo.url}}" alt="" width="25px" height="25px" class="rounded-circle" />
                   </div>
                   <div>
                     <p class="bg-grey py-1 px-2 rounded-3">Lorem, ipsum dolor</p>
@@ -1037,13 +1032,13 @@
                     <p class="bg-grey py-1 px-2 rounded-3">Lorem, ipsum dolor</p>
                   </div>
                   <div>
-                    <img src="https://source.unsplash.com/random/2" alt="" width="25px" height="25px" class="rounded-circle" />
+                    <img src="{{post.user.userprofile.photo.url}}" alt="" width="25px" height="25px" class="rounded-circle" />
                   </div>
                 </li>
                 <!-- msg sender 1 -->
                 <li class="d-flex">
                   <div class="me-2">
-                    <img src="https://source.unsplash.com/random/1" alt="" width="25px" height="25px" class="rounded-circle" />
+                    <img src="{{post.user.userprofile.photo.url}}" alt="" width="25px" height="25px" class="rounded-circle" />
                   </div>
                   <div>
                     <p class="bg-grey py-1 px-2 rounded-3">Lorem, ipsum dolor</p>
@@ -1055,13 +1050,13 @@
                     <p class="bg-grey py-1 px-2 rounded-3">Lorem, ipsum dolor</p>
                   </div>
                   <div>
-                    <img src="https://source.unsplash.com/random/2" alt="" width="25px" height="25px" class="rounded-circle" />
+                    <img src="{{post.user.userprofile.photo.url}}" alt="" width="25px" height="25px" class="rounded-circle" />
                   </div>
                 </li>
                 <!-- msg sender 1 -->
                 <li class="d-flex">
                   <div class="me-2">
-                    <img src="https://source.unsplash.com/random/1" alt="" width="25px" height="25px" class="rounded-circle" />
+                    <img src="{{post.user.userprofile.photo.url}}" alt="" width="25px" height="25px" class="rounded-circle" />
                   </div>
                   <div>
                     <p class="bg-grey py-1 px-2 rounded-3">Lorem, ipsum dolor</p>
@@ -1073,7 +1068,7 @@
                     <p class="bg-grey py-1 px-2 rounded-3">Lorem, ipsum dolor</p>
                   </div>
                   <div>
-                    <img src="https://source.unsplash.com/random/2" alt="" width="25px" height="25px" class="rounded-circle" />
+                    <img src="{{post.user.userprofile.photo.url}}" alt="" width="25px" height="25px" class="rounded-circle" />
                   </div>
                 </li>
               </div>
@@ -1135,16 +1130,21 @@
             <div class="h-100 fixed-top overflow-hidden scrollbar" style="max-width: 330px; width: 100%; z-index: 4">
               <ul class="navbar-nav d-flex flex-column" style="padding-top: 64px">
                 <!-- avatar -->
+                
                 <li class="dropdown-item my-3 p-1">
+                  {% if user.is_authenticated %}
                   <a class="text-decoration-none text-dark d-flex align-items-center" href="#">
                     <div>
                       <img src='{{user.userprofile.photo.url}}' alt="" width="40px" height="40px" class="object-fit-cover rounded-circle mx-2" />
                     </div>
                     <div>
-                      <p class="fw-bold my-auto">{{user.username}}</p>
+                      <p class="fw-bold my-auto">{{user.first_name}} {{user.last_name}}</p>
+                      <p class="my-auto">@{{user.username}}</p>
                     </div>
                   </a>
+                  {% endif %}
                 </li>
+                
                 <!-- Friends -->
                 <li class="dropdown-item mb-3 p-1">
                   <a class="text-decoration-none text-dark d-flex align-items-center" href="#">
@@ -1563,7 +1563,7 @@
                   <li class="dropdown-item mb-3 p-1">
                     <a class="text-decoration-none text-dark d-flex align-items-center" href="#" type="button" data-bs-toggle="modal" data-bs-target="#existingChat">
                       <div class="position-relative">
-                        <img src="https://source.unsplash.com/random/3" alt="" width="40px" height="40px" class="object-fit-cover rounded-circle mx-2" />
+                        <img src="{{post.user.userprofile.photo.url}}" alt="" width="40px" height="40px" class="object-fit-cover rounded-circle mx-2" />
                         <i class="fa-solid fa-circle text-success position-absolute bottom-0 end-0 fs-8" style="left: 70%"></i>
                       </div>
                       <div>
@@ -1575,7 +1575,7 @@
                   <li class="dropdown-item mb-3 p-1">
                     <a class="text-decoration-none text-dark d-flex align-items-center" href="#" type="button" data-bs-toggle="modal" data-bs-target="#existingChat">
                       <div class="position-relative">
-                        <img src="https://source.unsplash.com/random/4" alt="" width="40px" height="40px" class="object-fit-cover rounded-circle mx-2" />
+                        <img src="{{post.user.userprofile.photo.url}}" alt="" width="40px" height="40px" class="object-fit-cover rounded-circle mx-2" />
                         <i class="fa-solid fa-circle text-success position-absolute bottom-0 end-0 fs-8" style="left: 70%"></i>
                       </div>
                       <div>
@@ -1583,66 +1583,7 @@
                       </div>
                     </a>
                   </li>
-                  <!-- chat3 -->
-                  <li class="dropdown-item mb-3 p-1">
-                    <a class="text-decoration-none text-dark d-flex align-items-center" href="#" type="button" data-bs-toggle="modal" data-bs-target="#existingChat">
-                      <div class="position-relative">
-                        <img src="https://source.unsplash.com/random/5" alt="" width="40px" height="40px" class="object-fit-cover rounded-circle mx-2" />
-                        <i class="fa-solid fa-circle text-success position-absolute bottom-0 end-0 fs-8" style="left: 70%"></i>
-                      </div>
-                      <div>
-                        <p class="my-auto mx-1">Stone</p>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- chat4 -->
-                  <li class="dropdown-item mb-3 p-1">
-                    <a class="text-decoration-none text-dark d-flex align-items-center" href="#" type="button" data-bs-toggle="modal" data-bs-target="#existingChat">
-                      <div class="position-relative">
-                        <img src="https://source.unsplash.com/random/6" alt="" width="40px" height="40px" class="object-fit-cover rounded-circle mx-2" />
-                        <i class="fa-solid fa-circle text-success position-absolute bottom-0 end-0 fs-8" style="left: 70%"></i>
-                      </div>
-                      <div>
-                        <p class="my-auto mx-1">Kawser</p>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- chat5 -->
-                  <li class="dropdown-item mb-3 p-1">
-                    <a class="text-decoration-none text-dark d-flex align-items-center" href="#" type="button" data-bs-toggle="modal" data-bs-target="#existingChat">
-                      <div class="position-relative">
-                        <img src="https://source.unsplash.com/random/8" alt="" width="40px" height="40px" class="object-fit-cover rounded-circle mx-2" />
-                        <i class="fa-solid fa-circle text-success position-absolute bottom-0 end-0 fs-8" style="left: 70%"></i>
-                      </div>
-                      <div>
-                        <p class="my-auto mx-1">Sara</p>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- chat6 -->
-                  <li class="dropdown-item mb-3 p-1">
-                    <a class="text-decoration-none text-dark d-flex align-items-center" href="#" type="button" data-bs-toggle="modal" data-bs-target="#existingChat">
-                      <div class="position-relative">
-                        <img src="https://source.unsplash.com/random/9" alt="" width="40px" height="40px" class="object-fit-cover rounded-circle mx-2" />
-                        <i class="fa-solid fa-circle text-success position-absolute bottom-0 end-0 fs-8" style="left: 70%"></i>
-                      </div>
-                      <div>
-                        <p class="my-auto mx-1">Mika</p>
-                      </div>
-                    </a>
-                  </li>
-                  <!-- chat7 -->
-                  <li class="dropdown-item mb-3 p-1">
-                    <a class="text-decoration-none text-dark d-flex align-items-center" href="#" type="button" data-bs-toggle="modal" data-bs-target="#existingChat">
-                      <div class="position-relative">
-                        <img src="https://source.unsplash.com/random/5" alt="" width="40px" height="40px" class="object-fit-cover rounded-circle mx-2" />
-                        <i class="fa-solid fa-circle text-success position-absolute bottom-0 end-0 fs-8" style="left: 70%"></i>
-                      </div>
-                      <div>
-                        <p class="my-auto mx-1">Arijit</p>
-                      </div>
-                    </a>
-                  </li>
+                  
                 </div>
               </ul>
             </div>

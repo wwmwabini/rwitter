@@ -2,6 +2,7 @@ import os
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import FileExtensionValidator
 from django.urls import reverse
 from PIL import Image
 from rwitter.functions import random_image_name
@@ -28,5 +29,21 @@ class Post(models.Model):
         return reverse('tweets-home')
     
     
+class Feedback(models.Model):
     
+    class Subject(models.TextChoices):
+        provide_recommendation = 'Provide Recommendation'
+        error_experienced = 'Error Experienced'
+        report_abuse = 'Report Abuse'
+        other = 'Other'
+    subject = models.CharField('What is it About?', max_length=25, choices=Subject.choices)
+    content = models.TextField('Tell us more', max_length=2500)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    media = models.FileField('Upload an image or video(recommended)', upload_to='feedback_media/', null=True, blank=True, 
+                             validators=[FileExtensionValidator(allowed_extensions=['pdf', 'png', 'jpeg', 'jpg', 'gif', 'mov', 'mp4', 'mp3', 'mkv'])])
+
+    def __str__(self):
+        return f'#{self.id} Feedback shared by {self.user.username} on {self.created_at.strftime("%d %B, %Y %H:%M")}'
+
 

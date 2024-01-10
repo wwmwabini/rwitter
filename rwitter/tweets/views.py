@@ -2,11 +2,12 @@ from typing import Optional
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .forms import SearchHistoryForm
-from .models import SearchHistory, Post
+from .forms import SearchHistoryForm, FeedbackForm
+from .models import SearchHistory, Post, Feedback
 
 from users.models import UserProfile
-from django.contrib.auth.models import User 
+from django.contrib.auth.models import User
+from django.contrib import messages
 from django.db.models import Q
 from django.utils import timezone
 
@@ -147,3 +148,23 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
 def searchresults(request):
     
     return render(request, 'tweets/search.html')
+
+def feedback(request):
+    form = FeedbackForm()
+
+    if request.method == "POST":
+        feedback_subject = request.POST.get('subject')
+        feedback_content = request.POST.get('content')
+        feedback_media = ""
+
+        log_feedback = Feedback.objects.create(subject=feedback_subject, content=feedback_content, user_id=request.user.id)
+        log_feedback.save()
+
+        messages.warning(request, 'Thank you for your feedback. We will look into it.')
+        return redirect('tweets-feedback')
+
+    context = {
+        'form': form
+    }
+
+    return render(request, 'tweets/feedback.html', context=context)

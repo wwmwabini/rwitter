@@ -1,0 +1,22 @@
+{% extends 'tweets/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="col-12 col-lg-6">
+    <div class="d-flex flex-column mx-auto justify-content-center w-100 container-fluid overflow-hidden" style="max-width: 680px">
+      <!--== Stories ==-->
+      <legend class="border-bottom mb-4 text-center">
+        <strong>Give Feedback</strong>
+        </legend>
+      <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form|crispy}}
+
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <button class="btn btn-lg btn-primary" type="submit" style="width: 200px;">Submit</button>
+        </div>
+    </form>
+    </div>
+</div>
+{% endblock content%}
