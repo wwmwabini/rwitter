@@ -24,6 +24,7 @@ class UserProfile(models.Model):
     dob = models.DateField(null=True, blank=True)
     website = models.CharField(max_length=200, null=True, blank=True)
     photo = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    is_online = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.user.username} - {self.user.email}' 

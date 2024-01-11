@@ -1470,7 +1470,7 @@
                 <div>
                   <!-- header -->
                   <li class="dropdown-item mb-3 p-1 d-flex align-items-center justify-content-between">
-                    <h4>Messages</h4>
+                    <h4>Friends Online</h4>
                     <div class="d-flex align-items-center">
                       <!-- video room -->
                       <i class="fa-solid fa-video me-2" type="button" data-bs-toggle="modal" data-bs-target="#videoRoomModal"></i>
@@ -1560,30 +1560,23 @@
                     </div>
                   </li>
                   <!-- chat1 -->
+                  {% for contact in contacts %}
                   <li class="dropdown-item mb-3 p-1">
                     <a class="text-decoration-none text-dark d-flex align-items-center" href="#" type="button" data-bs-toggle="modal" data-bs-target="#existingChat">
                       <div class="position-relative">
-                        <img src="{{post.user.userprofile.photo.url}}" alt="" width="40px" height="40px" class="object-fit-cover rounded-circle mx-2" />
-                        <i class="fa-solid fa-circle text-success position-absolute bottom-0 end-0 fs-8" style="left: 70%"></i>
+                        <img src="{{contact.userprofile.photo.url}}" alt="" width="40px" height="40px" class="object-fit-cover rounded-circle mx-2" />
+                        {% if contact.userprofile.is_online %}
+                          <i class="fa-solid fa-circle text-success position-absolute bottom-0 end-0 fs-8" style="left: 70%"></i>
+                        {% else %}
+                          <i class="fa-solid fa-circle text-secondary position-absolute bottom-0 end-0 fs-8" style="left: 70%"></i>
+                        {% endif %}
                       </div>
                       <div>
-                        <p class="my-auto mx-1">Ariful</p>
+                        <p class="my-auto mx-1">{{ contact.first_name }}</p>
                       </div>
                     </a>
                   </li>
-                  <!-- chat2 -->
-                  <li class="dropdown-item mb-3 p-1">
-                    <a class="text-decoration-none text-dark d-flex align-items-center" href="#" type="button" data-bs-toggle="modal" data-bs-target="#existingChat">
-                      <div class="position-relative">
-                        <img src="{{post.user.userprofile.photo.url}}" alt="" width="40px" height="40px" class="object-fit-cover rounded-circle mx-2" />
-                        <i class="fa-solid fa-circle text-success position-absolute bottom-0 end-0 fs-8" style="left: 70%"></i>
-                      </div>
-                      <div>
-                        <p class="my-auto mx-1">Hasan</p>
-                      </div>
-                    </a>
-                  </li>
-                  
+                  {% endfor %}
                 </div>
               </ul>
             </div>

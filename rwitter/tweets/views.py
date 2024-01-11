@@ -16,6 +16,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import CreateView, UpdateView, DeleteView
 
+from django.contrib.auth.signals import user_logged_in, user_logged_out
+from django.dispatch import receiver    
+
 
 def do_search(searchterm):
     # search users, usersprofile table: columns username, bio
@@ -27,6 +30,22 @@ def do_search(searchterm):
 
     return results
 
+def get_contacts():
+    @receiver(user_logged_in)
+    def got_online(sender, user, request, **kwargs):    
+        user.userprofile.is_online = True
+        user.userprofile.save()
+
+    @receiver(user_logged_out)
+    def got_offline(sender, user, request, **kwargs):   
+        user.userprofile.is_online = False
+        user.userprofile.save()
+
+    from django.db.models import F
+
+    contacts = User.objects.annotate( is_online=F('userprofile__is_online')).order_by('-is_online')[:5]
+
+    return contacts
 
 def home(request):
 
@@ -98,11 +117,11 @@ def home(request):
     posts = Post.objects.all().order_by('-created_at')
 
 
-
     context = {
         'form1': form1,
         'posts': posts,
-        'search_history': search_history
+        'search_history': search_history,
+        'contacts': get_contacts()
     }
 
 
@@ -151,6 +170,7 @@ def searchresults(request):
     
     return render(request, 'tweets/search.html')
 
+
 @login_required
 def feedback(request):
     form = FeedbackForm()
@@ -174,7 +194,8 @@ def feedback(request):
             return redirect('tweets-feedback')
 
     context = {
-        'form': form
+        'form': form,
+        'contacts': get_contacts()
     }
 
     return render(request, 'tweets/feedback.html', context=context)
