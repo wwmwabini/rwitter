@@ -4,12 +4,14 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import SearchHistoryForm, FeedbackForm
 from .models import SearchHistory, Post, Feedback
+from rwitter.functions import handle_uploaded_file
 
 from users.models import UserProfile
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.db.models import Q
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import CreateView, UpdateView, DeleteView
@@ -149,19 +151,27 @@ def searchresults(request):
     
     return render(request, 'tweets/search.html')
 
+@login_required
 def feedback(request):
     form = FeedbackForm()
 
     if request.method == "POST":
-        feedback_subject = request.POST.get('subject')
-        feedback_content = request.POST.get('content')
-        feedback_media = ""
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            feedback_subject = request.POST.get('subject')
+            feedback_content = request.POST.get('content')
+            feedback_media = request.FILES['media']
 
-        log_feedback = Feedback.objects.create(subject=feedback_subject, content=feedback_content, user_id=request.user.id)
-        log_feedback.save()
+            media_file_name = handle_uploaded_file(feedback_media)
 
-        messages.warning(request, 'Thank you for your feedback. We will look into it.')
-        return redirect('tweets-feedback')
+            log_feedback = Feedback.objects.create(subject=feedback_subject, content=feedback_content, user_id=request.user.id, media=media_file_name)
+            log_feedback.save()
+
+            messages.info(request, 'Thank you for your feedback. We will look into it.')
+            return redirect('tweets-feedback')
+        else:
+            messages.warning(request, 'Sorry, there was an error uploading your file. Please try again later.')
+            return redirect('tweets-feedback')
 
     context = {
         'form': form

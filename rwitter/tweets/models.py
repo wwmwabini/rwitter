@@ -2,12 +2,13 @@ import os
 
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import FileExtensionValidator
+from django.core.validators import FileExtensionValidator, ValidationError
 from django.urls import reverse
 from PIL import Image
 from rwitter.functions import random_image_name
 
 default_post_image_folder='media/images/post_pics'
+default_feedback_media_folder='media/feedback_media'
 
 class SearchHistory(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
@@ -28,6 +29,7 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('tweets-home')
     
+
     
 class Feedback(models.Model):
     
@@ -45,5 +47,4 @@ class Feedback(models.Model):
 
     def __str__(self):
         return f'#{self.id} Feedback shared by {self.user.username} on {self.created_at.strftime("%d %B, %Y %H:%M")}'
-
-
+    

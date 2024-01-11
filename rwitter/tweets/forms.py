@@ -1,6 +1,6 @@
 from django import forms
 from .models import Feedback
-from django.forms import Textarea, FileField
+from django.forms import Textarea
 
 
 
@@ -21,3 +21,4 @@ class FeedbackForm(forms.ModelForm):
             'content': Textarea(attrs={'class': 'form-control', 'rows': 10}),
             'media': forms.FileInput(),
         }
+        
