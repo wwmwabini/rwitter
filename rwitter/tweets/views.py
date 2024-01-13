@@ -2,8 +2,8 @@ from typing import Optional
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .forms import SearchHistoryForm, FeedbackForm
-from .models import SearchHistory, Post, Feedback
+from .forms import SearchHistoryForm, FeedbackForm, StoryForm
+from .models import SearchHistory, Post, Feedback, Story
 from rwitter.functions import handle_uploaded_file
 
 from users.models import UserProfile
@@ -101,8 +101,6 @@ def home(request):
             #if searchterm is None, do nothing
             return redirect('tweets-home')
             
-
-        return redirect('tweets-home')
     
     elif request.method == 'GET':
         if request.user.is_authenticated:
@@ -113,13 +111,16 @@ def home(request):
 
 
     # Posts
-
     posts = Post.objects.all().order_by('-created_at')
+
+    # Stories
+    stories = Story.objects.order_by('-created_at')[:10]
 
 
     context = {
         'form1': form1,
         'posts': posts,
+        'stories':stories,
         'search_history': search_history,
         'contacts': get_contacts()
     }
@@ -132,7 +133,7 @@ def home(request):
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template="tweets/feed.html"
-    fields = ['content']
+    fields = ['content', 'image']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -173,6 +174,7 @@ def searchresults(request):
 
 @login_required
 def feedback(request):
+    media_location = 'feedback_media'
     form = FeedbackForm()
 
     if request.method == "POST":
@@ -182,7 +184,7 @@ def feedback(request):
             feedback_content = request.POST.get('content')
             feedback_media = request.FILES['media']
 
-            media_file_name = handle_uploaded_file(feedback_media)
+            media_file_name = handle_uploaded_file(feedback_media, media_location, 'feedback')
 
             log_feedback = Feedback.objects.create(subject=feedback_subject, content=feedback_content, user_id=request.user.id, media=media_file_name)
             log_feedback.save()
@@ -199,3 +201,40 @@ def feedback(request):
     }
 
     return render(request, 'tweets/feedback.html', context=context)
+
+@login_required
+def story(request):
+    media_location = 'stories_media'
+
+    story_form = StoryForm()
+
+    if request.method == "POST":
+        story_form = StoryForm(request.POST)
+
+        if story_form.is_valid():
+
+            story_media = request.FILES['story']
+
+            story_file = handle_uploaded_file(story_media, media_location, 'story')
+
+            log_story = Story.objects.create(story=story_file, user_id=request.user.id)
+            log_story.save()
+            
+
+            messages.info(request, 'Great, your story has been updated...')
+            return redirect('tweets-home')
+        
+            
+        else:
+            messages.warning(request, 'Oops. There was an error updating your story, please retry...')
+            return redirect('tweets-story')
+
+    
+    context = {
+                'story_form': story_form,
+                'contacts': get_contacts()
+            }
+
+    print(context)
+
+    return render(request, 'tweets/story.html', context=context)

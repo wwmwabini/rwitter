@@ -7,35 +7,25 @@
     <!--== Stories ==-->
     <div class="d-flex align-items-center justify-content-between mt-3 position-relative">
       <!-- Story1 mystory -->
-      <div class="mx-1 bg-white rounded story" style="width: 6em; height: 190px">
-        <img src="https://source.unsplash.com/collection/happy-people" class="card-img-top object-fit-cover rounded-1" style="min-height: 125px" alt="story post" />
-        <div class="d-flex align-items-center justify-content-center position-relative" style="min-height: 65px">
-          <p class="mb-0 fs-7 fw-bold">Create Story</p>
-          <div class="position-absolute top-0 start-50 translate-middle">
-            <i class="fas fa-plus-circle p-1 bg-white rounded-circle fs-3 text-primary"></i>
+      <a class="text-decoration-none" href="{% url 'tweets-story' %}">
+        <div class="mx-1 bg-white rounded story" style="width: 7em; height: 190px">
+          <img src="{{user.userprofile.photo.url}}" class="card-img-top object-fit-cover rounded-1" style="height: 150px" alt="story post" />
+          <div class="d-flex align-items-center justify-content-center position-relative" style="min-height: 65px">
+            <p class="mb-0 fs-7 fw-bold">Create Story</p>
+            <div class="position-absolute top-0 start-50 translate-middle">
+              <i class="fas fa-plus-circle p-1 bg-white rounded-circle fs-3 text-primary"></i>
+            </div>
           </div>
         </div>
+      </a>
+      {% for s in stories %}
+      <div class="mx-1 bg-white rounded story" style="width: 7em; height: 190px">
+        <img src="/media/stories_media/{{s.story}}" class="card-img-top object-fit-cover rounded-1" style="height: 150px" alt="story by {{s.user.username}}" />
+        <div class="d-flex align-items-center justify-content-center position-relative" style="min-height: 65px">
+          <p class="small mb-0 fs-7 fw-bold">{{s.user.first_name}} {{s.user.last_name}}</p>
+        </div>
       </div>
-      <!-- Story2 -->
-      <div class="mx-1 bg-white rounded story" style="width: 6em; height: 190px">
-        <img src="{{post.user.userprofile.photo.url}}" class="card-img-top object-fit-cover rounded-1" style="min-height: 190px" alt="story post" />
-      </div>
-      <!-- Story3 -->
-      <div class="mx-1 bg-white rounded story" style="width: 6em; height: 190px">
-        <img src="{{post.user.userprofile.photo.url}}" class="card-img-top object-fit-cover rounded-1" style="min-height: 190px" alt="story post" />
-      </div>
-      <!-- Story4 -->
-      <div class="mx-1 bg-white rounded story" style="width: 6em; height: 190px">
-        <img src="{{post.user.userprofile.photo.url}}" class="card-img-top object-fit-cover rounded-1" style="min-height: 190px" alt="story post" />
-      </div>
-      <!-- Story5 -->
-      <div class="mx-1 bg-white rounded d-none d-lg-block story" style="width: 6em; height: 190px">
-        <img src="{{post.user.userprofile.photo.url}}" class="card-img-top object-fit-cover rounded-1" style="min-height: 190px" alt="story post" />
-      </div>
-      <!-- Story6 -->
-      <div class="mx-1 bg-white rounded d-none d-lg-block story" style="width: 6em; height: 190px">
-        <img src="{{post.user.userprofile.photo.url}}" class="card-img-top object-fit-cover rounded-1" style="min-height: 190px" alt="story post" />
-      </div>
+      {% endfor %}
       <!-- next icon -->
       <div class="position-absolute top-50 start-100 translate-middle d-none d-lg-block">
         <i class="fas fa-arrow-right p-3 border text-muted bg-white rounded-circle"></i>
@@ -45,7 +35,7 @@
     <div class="bg-white w-100 p-3 mt-3">
       <!-- avatar -->
       <div class="d-flex" type="button">
-        <img src="https://source.unsplash.com/collection/happy-people" alt="avatar" class="object-fit-cover rounded-circle me-2" style="width: 38px; height: 38px" />
+        <img src="{{user.userprofile.photo.url}}" alt="avatar" class="object-fit-cover rounded-circle me-2" style="width: 38px; height: 38px" />
         <!-- <input type="text" class="form-control mx-1 rounded-pill bg-grey border-0 py-2" placeholder="What's on your mind, {{user.first_name}}?" disabled data-bs-toggle="modal" data-bs-target="#createModal" /> -->
         <a class="btn btn-outline-info" href="{% url 'post-create' %}">Create a Post</a>
       </div>
@@ -78,32 +68,23 @@
 
       <!-- slider mobile -->
       <div class="col-8 d-xl-none text-end">
-        <img src="{{post.user.userprofile.photo.url}}" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
-        <img src="{{post.user.userprofile.photo.url}}" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
-        <img src="{{post.user.userprofile.photo.url}}" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
-        <img src="{{post.user.userprofile.photo.url}}" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+        {% for contact in contacts %}
+        <img src="{{contact.userprofile.photo.url}}" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+        {% endfor %}
       </div>
       <!-- slider desktop -->
       <div class="col-8 d-none d-xl-block position-relative" style="max-width: 450px">
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner text-center">
             <div class="carousel-item active">
-              <img src="{{post.user.userprofile.photo.url}}" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
-              <img src="{{post.user.userprofile.photo.url}}" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
-              <img src="{{post.user.userprofile.photo.url}}" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
-              <img src="{{post.user.userprofile.photo.url}}" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
-              <img src="{{post.user.userprofile.photo.url}}" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
-              <img src="{{post.user.userprofile.photo.url}}" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
-              <img src="{{post.user.userprofile.photo.url}}" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+              {% for contact in contacts %}
+              <img src="{{contact.userprofile.photo.url}}" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+              {% endfor %}
             </div>
             <div class="carousel-item">
-              <img src="{{post.user.userprofile.photo.url}}" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
-              <img src="{{post.user.userprofile.photo.url}}" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
-              <img src="{{post.user.userprofile.photo.url}}" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
-              <img src="{{post.user.userprofile.photo.url}}" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
-              <img src="{{post.user.userprofile.photo.url}}" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
-              <img src="{{post.user.userprofile.photo.url}}" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
-              <img src="{{post.user.userprofile.photo.url}}" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+              {% for contact in contacts %}
+              <img src="{{contact.userprofile.photo.url}}" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
+              {% endfor %}
             </div>
           </div>
         </div>
@@ -121,6 +102,7 @@
         </div>
       </div>
     </div>
+
     <!--== Posts ==-->
     <div>
       <!-- own post 1 -->

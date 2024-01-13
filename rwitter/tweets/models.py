@@ -19,7 +19,7 @@ class SearchHistory(models.Model):
 class Post(models.Model):
     content = models.TextField(max_length=180)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    image = models.ImageField(blank=True, null=True, upload_to='post_images')
+    image = models.ImageField(blank=True, null=True, upload_to='post_media')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -48,3 +48,11 @@ class Feedback(models.Model):
     def __str__(self):
         return f'#{self.id} Feedback shared by {self.user.username} on {self.created_at.strftime("%d %B, %Y %H:%M")}'
     
+
+class Story(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    story = models.ImageField('Tell your story with an image or video', blank=True, null=True, upload_to='stories_media/')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Story #{self.id} by {self.user.username}'
