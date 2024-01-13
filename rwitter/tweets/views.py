@@ -111,7 +111,7 @@ def home(request):
 
 
     # Posts
-    posts = Post.objects.all().order_by('-created_at')
+    posts = Post.objects.all().order_by('-updated_at')
 
     # Stories
     stories = Story.objects.order_by('-created_at')[:10]
@@ -137,15 +137,27 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+
+        media_location = 'post_media'
+
+        post_file = handle_uploaded_file(form.cleaned_data.get('image'), media_location, 'post')
+        form.instance.image = post_file
+
         return super().form_valid(form)
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['content']
+    fields = ['content', 'image']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+
+        media_location = 'post_media'
+
+        post_file = handle_uploaded_file(form.cleaned_data.get('image'), media_location, 'post')
+        form.instance.image = post_file
+
         return super().form_valid(form)
     
     def test_func(self):
