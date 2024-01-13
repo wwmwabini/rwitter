@@ -37,6 +37,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'tweets.apps.TweetsConfig',
     'users.apps.UsersConfig',
+    'ads.apps.AdsConfig',
     'crispy_forms',
     'crispy_bootstrap5',
     'bootstrap_datepicker_plus',

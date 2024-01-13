@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_control
 from .forms import RegisterForm, UpdateProfileForm, UpdateUserForm
 from .models import UserProfile 
 
@@ -25,6 +26,7 @@ def register(request):
         form = RegisterForm()
     return render(request, 'users/user_register.html', {'form': form})
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required
 def profile(request):
 

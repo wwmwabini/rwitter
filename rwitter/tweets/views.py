@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import SearchHistoryForm, FeedbackForm, StoryForm
 from .models import SearchHistory, Post, Feedback, Story
+from ads.models import Ads
+
 from rwitter.functions import handle_uploaded_file
 
 from users.models import UserProfile
@@ -12,6 +14,7 @@ from django.contrib import messages
 from django.db.models import Q
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_control
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import CreateView, UpdateView, DeleteView
@@ -116,18 +119,21 @@ def home(request):
     # Stories
     stories = Story.objects.order_by('-created_at')[:10]
 
+    # Ads
+    ads = Ads.objects.order_by('-created_at')[:2]
+
 
     context = {
         'form1': form1,
         'posts': posts,
         'stories':stories,
+        'ads': ads,
         'search_history': search_history,
         'contacts': get_contacts()
     }
 
 
     return render(request, 'tweets/feed.html', context)
-
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
@@ -183,7 +189,7 @@ def searchresults(request):
     
     return render(request, 'tweets/search.html')
 
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required
 def feedback(request):
     media_location = 'feedback_media'
@@ -214,6 +220,7 @@ def feedback(request):
 
     return render(request, 'tweets/feedback.html', context=context)
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required
 def story(request):
     media_location = 'stories_media'

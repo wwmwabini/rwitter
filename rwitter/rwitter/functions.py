@@ -19,7 +19,7 @@ def random_image_name(self):
 def handle_uploaded_file(file, location, prefix):
     _, file_extension = os.path.splitext(file.name)
     random_media_name = prefix + '-' + secrets.token_hex(12) + file_extension
-    print("Actual file name: ", file.name)
+    #print("Actual file name: ", file.name)
     if not location.endswith('/'):
         location += '/'
     with open('media/'+location + random_media_name, 'wb+') as destination:

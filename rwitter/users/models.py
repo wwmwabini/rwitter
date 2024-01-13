@@ -28,5 +28,9 @@ class UserProfile(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.photo.path)
+
+    class Meta:
+        verbose_name = "Profile"
+        verbose_name_plural = "Profiles"
     
 

@@ -7,6 +7,7 @@ from django.urls import reverse
 from PIL import Image
 from rwitter.functions import random_image_name
 
+
 default_post_image_folder='media/images/post_pics'
 default_feedback_media_folder='media/feedback_media'
 
@@ -56,3 +57,7 @@ class Story(models.Model):
 
     def __str__(self):
         return f'Story #{self.id} by {self.user.username}'
+    
+    class Meta:
+        verbose_name = "Story"
+        verbose_name_plural = "Stories"

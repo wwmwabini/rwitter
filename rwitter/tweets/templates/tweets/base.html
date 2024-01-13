@@ -1363,15 +1363,20 @@
                     <h4>Sponsored</h4>
                   </li>
                   <!-- sponsor1 -->
+                  {% for ad in ads %}
                   <li class="dropdown-item my-3 p-1 d-flex align-items-between">
                     <a class="text-decoration-none text-dark d-flex align-items-center" href="#">
                       <!-- image and title -->
                       <div>
-                        <img src="https://source.unsplash.com/random/3" alt="" width="90px" height="90px" class="object-fit-cover rounded mx-2" />
+                        <a href="https://{{ad.redirect_website}}" target="_blank"></a>
+                          <img src="/media/ads_media/{{ad.image}}" alt="{{ad.redirect_website}}" width="90px" height="90px" class="object-fit-cover rounded mx-2" />
+                        </a>
                       </div>
                       <div class="d-flex flex-column justify-content-center">
-                        <p class="p-0 m-0">Cars for sale</p>
-                        <p class="p-0 m-0 fs-7">buythecars.ke</p>
+                        <p class="p-0 m-0 small">{{ad.message}}</p>
+                        <a href="https://{{ad.redirect_website}}" target="_blank">
+                          <p class="p-0 m-0 small">{{ad.redirect_website}}</p>
+                        </a>
                       </div>
                     </a>
                     <!-- setting -->
@@ -1413,57 +1418,7 @@
                       <!-- dd end -->
                     </div>
                   </li>
-                  <!-- sponsor2 -->
-                  <li class="dropdown-item my-3 p-1 d-flex align-items-between">
-                    <a class="text-decoration-none text-dark d-flex align-items-center" href="#">
-                      <!-- image and title -->
-                      <div>
-                        <img src="https://source.unsplash.com/random/2" alt="" width="90px" height="90px" class="object-fit-cover rounded mx-2" />
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <p class="p-0 m-0">Lorem Ipsum</p>
-                        <p class="p-0 m-0 fs-7">loeremipsum.com</p>
-                      </div>
-                    </a>
-                    <!-- setting -->
-                    <div class="ms-4">
-                      <!-- setting icon -->
-                      <i class="fa-solid fa-ellipsis rounded-circle bg-white p-2" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
-                      <!-- setting dd -->
-                      <ul class="dropdown-menu">
-                        <!-- hide ad -->
-                        <li class="p-2">
-                          <a href="#" class="d-flex dropdown-item align-items-center text-decoration-none text-dark">
-                            <i class="far fa-window-close"></i>
-                            <div class="ms-3">
-                              <p class="m-0">Hide Ad</p>
-                              <span class="text-muted fs-7">Never see this add again.</span>
-                            </div>
-                          </a>
-                        </li>
-                        <!-- report ad -->
-                        <li class="p-2">
-                          <a href="#" class="d-flex dropdown-item align-items-center text-decoration-none text-dark">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <div class="ms-3">
-                              <p class="m-0">Report Ad</p>
-                              <span class="text-muted fs-7">Tell us a problem with this add</span>
-                            </div>
-                          </a>
-                        </li>
-                        <!-- why iam see -->
-                        <li class="p-2">
-                          <a href="#" class="d-flex dropdown-item align-items-center text-decoration-none text-dark">
-                            <i class="fas fa-info-circle"></i>
-                            <div class="ms-3">
-                              <p class="m-0">Why i am seeing this?</p>
-                            </div>
-                          </a>
-                        </li>
-                      </ul>
-                      <!-- dd end -->
-                    </div>
-                  </li>
+                  {% endfor %}                  
                 </div>
                 <hr />
                 <!-- Contacts -->
