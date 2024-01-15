@@ -1365,20 +1365,22 @@
                   <!-- sponsor1 -->
                   {% for ad in ads %}
                   <li class="dropdown-item my-3 p-1 d-flex align-items-between">
-                    <a class="text-decoration-none text-dark d-flex align-items-center" href="#">
-                      <!-- image and title -->
-                      <div>
-                        <a href="https://{{ad.redirect_website}}" target="_blank"></a>
-                          <img src="/media/ads_media/{{ad.image}}" alt="{{ad.redirect_website}}" width="90px" height="90px" class="object-fit-cover rounded mx-2" />
-                        </a>
-                      </div>
+                      <a class="text-decoration-none text-dark d-flex align-items-center" href="https://{{ad.redirect_website}}">
+                        <!-- image and title -->
+                        <div>
+                          <a href="https://{{ad.redirect_website}}" target="_blank">
+                            <img src="/media/ads_media/{{ad.image}}" alt="{{ad.redirect_website}}" width="90px" height="90px" class="object-fit-cover rounded mx-2" />
+                          </a>
+                        </div>
+                      </a>
                       <div class="d-flex flex-column justify-content-center">
-                        <p class="p-0 m-0 small">{{ad.message}}</p>
-                        <a href="https://{{ad.redirect_website}}" target="_blank">
-                          <p class="p-0 m-0 small">{{ad.redirect_website}}</p>
+                        <a class="text-decoration-none" href="https://{{ad.redirect_website}}" target="_blank">
+                          <div>
+                            <p class="p-0 m-0 small text-dark">{{ad.message}}</p>
+                            <p class="p-0 m-0 small text-muted">{{ad.redirect_website}}</p>
+                          </div>
                         </a>
                       </div>
-                    </a>
                     <!-- setting -->
                     <div class="ms-4">
                       <!-- setting icon -->
@@ -1387,13 +1389,19 @@
                       <ul class="dropdown-menu">
                         <!-- hide ad -->
                         <li class="p-2">
-                          <a href="#" class="d-flex dropdown-item align-items-center text-decoration-none text-dark">
-                            <i class="far fa-window-close"></i>
-                            <div class="ms-3">
-                              <p class="m-0">Hide Ad</p>
-                              <span class="text-muted fs-7">Never see this add again.</span>
-                            </div>
-                          </a>
+                          <form action="" method="POST">
+                            {% csrf_token %}
+                            
+                            <button type="submit" name="hide_ad_btn" value="{{ad.id}}" class="d-flex dropdown-item align-it text-decoration-none text-dark">
+                                <i class="far fa-window-close"></i>
+                                <div class="ms-3">
+                                  <p class="m-0">Hide Ad</p>
+                                  <span class="text-muted small style='font-size: x-small;' ">Never see this add again.</span>
+                                </div>
+                            </button>
+
+                          </form>
+                          
                         </li>
                         <!-- report ad -->
                         <li class="p-2">
@@ -1401,7 +1409,7 @@
                             <i class="fas fa-exclamation-triangle"></i>
                             <div class="ms-3">
                               <p class="m-0">Report Ad</p>
-                              <span class="text-muted fs-7">Tell us a problem with this add</span>
+                              <span class="text-muted small style='font-size: x-small;' ">Tell us a problem with this add</span>
                             </div>
                           </a>
                         </li>

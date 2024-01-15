@@ -2,7 +2,7 @@ from typing import Optional
 from django.forms.models import BaseModelForm
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .forms import SearchHistoryForm, FeedbackForm, StoryForm
+from .forms import SearchHistoryForm, FeedbackForm, StoryForm, CommentForm
 from .models import SearchHistory, Post, Feedback, Story
 from ads.models import Ads
 
@@ -50,7 +50,12 @@ def get_contacts():
 
     return contacts
 
+@login_required
 def home(request):
+
+    #Comments
+    
+    comment_form = CommentForm()
 
     #Search
 
@@ -128,12 +133,14 @@ def home(request):
         'posts': posts,
         'stories':stories,
         'ads': ads,
+        'comment_form': comment_form,
         'search_history': search_history,
         'contacts': get_contacts()
     }
 
 
     return render(request, 'tweets/feed.html', context)
+
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):

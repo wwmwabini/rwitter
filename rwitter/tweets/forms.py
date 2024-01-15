@@ -1,5 +1,5 @@
 from django import forms
-from .models import Feedback, Story
+from .models import Feedback, Story, Comment
 from django.forms import Textarea
 
 
@@ -29,4 +29,13 @@ class StoryForm(forms.ModelForm):
 
         widgets = {
             'story': forms.FileInput(),
+        }
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']
+
+        widgets = {
+            'content': Textarea(attrs={'class': 'form-control border-0 rounded-pill bg-gray', 'placeholder': 'Write a comment'}),
         }

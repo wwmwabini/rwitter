@@ -25,13 +25,34 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'Post #{self.id} by {self.user.username}' 
+        return f'Post #{self.id} by {self.user.username}'
+
+    @property
+    def post_comments(self):
+        return Comment.objects.filter(post=self) 
+
+    @property
+    def comment_count(self):
+        return Comment.objects.filter(post=self).count()
     
     def get_absolute_url(self):
         return reverse('tweets-home')
     
 
+class Comment(models.Model):
+    content = models.TextField(max_length=180)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'Comment by {self.user.username} on post {self.post.id}'
     
+
+
+
+
 class Feedback(models.Model):
     
     class Subject(models.TextChoices):
