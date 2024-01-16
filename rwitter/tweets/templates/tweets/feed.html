@@ -161,7 +161,7 @@
               <div class="accordion-item border-0">
                 <!-- comment collapse -->
                 <h2 class="accordion-header" id="headingTwo">
-                  <div class="accordion-button collapsed pointer d-flex justify-content-end" data-bs-toggle="collapse" data-bs-target="#collapsePost1" aria-expanded="false" aria-controls="collapsePost1">
+                  <div class="accordion-button collapsed pointer d-flex justify-content-end" data-bs-toggle="collapse" data-bs-target="#collapsePost{{post.id}}" aria-expanded="false" aria-controls="collapsePost{{post.id}}">
                     {% if post.comment_count == 0 %}
                       <p class="m-0 d-none d-lg-block">No comments yet</p>
                     {% else %}
@@ -176,26 +176,30 @@
                     <i class="fas fa-thumbs-up me-3"></i>
                     <p class="m-0">Like</p>
                   </div>
-                  <div class="dropdown-item rounded d-flex justify-content-center align-items-center pointer text-muted p-1" data-bs-toggle="collapse" data-bs-target="#collapsePost1" aria-expanded="false" aria-controls="collapsePost1">
+                  <div class="dropdown-item rounded d-flex justify-content-center align-items-center pointer text-muted p-1" data-bs-toggle="collapse" data-bs-target="#collapsePost{{post.id}}" aria-expanded="false" aria-controls="collapsePost{{post.id}}">
                     <i class="fas fa-comment-alt me-3"></i>
                     <p class="m-0">Comment</p>
                   </div>
                 </div>
                 <!-- comment expand -->
-                <div id="collapsePost1" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div id="collapsePost{{post.id}}" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                   <hr />
                   <div class="accordion-body">
-                    
                      <!-- create comment -->
                      <form class="d-flex my-1" action="" method="POST">
                       {% csrf_token %}
-                      <!-- avatar -->
                       <div>
                         <img src="{{user.userprofile.photo.url}}" alt="avatar" class="rounded-circle me-2" style="width: 38px; height: 38px; object-fit: cover" />
                       </div>
                       {{comment_form|crispy}}
+
+                      <input type="hidden" name="post_id" value="{{post.id}}">
+
+                      <button class="btn btn-sm btn-primary rounded-cirlce m-1" style="margin-bottom: 8px; width: 80px; height: 40px; flex: 0 0 auto;" 
+                      type="submit" name="post_comment_form">
+                        Comment
+                      </button>
                     </form>
-                    <!-- end -->
 
                     <!-- comment 1 -->
                     {% for comment in post.post_comments %}

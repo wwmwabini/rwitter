@@ -1,9 +1,9 @@
 from typing import Optional
 from django.forms.models import BaseModelForm
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .forms import SearchHistoryForm, FeedbackForm, StoryForm, CommentForm
-from .models import SearchHistory, Post, Feedback, Story
+from .models import SearchHistory, Post, Feedback, Story, Comment
 from ads.models import Ads
 
 from rwitter.functions import handle_uploaded_file
@@ -17,7 +17,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 
 from django.contrib.auth.signals import user_logged_in, user_logged_out
 from django.dispatch import receiver    
@@ -32,6 +32,7 @@ def do_search(searchterm):
         print(result)
 
     return results
+
 
 def get_contacts():
     @receiver(user_logged_in)
@@ -50,18 +51,33 @@ def get_contacts():
 
     return contacts
 
+
 @login_required
 def home(request):
 
     #Comments
     
-    comment_form = CommentForm()
+    comment_form = CommentForm(request.POST)
+
+    if request.method == 'POST' and 'post_comment_form' in request.POST:
+        post_id = request.POST.get('post_id')
+        if comment_form.is_valid() and request.POST.get('content') != "":
+            log_comment = Comment.objects.create(content=request.POST.get('content'), post_id=post_id, user_id=request.user.id)
+            log_comment.save()
+
+            return HttpResponseRedirect(request.path_info)
+        else:
+            messages.warning(request, "Please type your message first before submitting the comment.")
+            return HttpResponseRedirect(request.path_info)
+        
 
     #Search
 
+    search_history = ""
+
     form1 = SearchHistoryForm(request.POST)
 
-    if request.method == 'POST':
+    if request.method == 'POST' and 'searchterm' in request.POST:
         searchterm = request.POST.get('searchterm')
         clearall = request.POST.get('clearall')
 
@@ -142,7 +158,6 @@ def home(request):
     return render(request, 'tweets/feed.html', context)
 
 
-
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template="tweets/feed.html"
@@ -157,6 +172,9 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         form.instance.image = post_file
 
         return super().form_valid(form)
+
+class PostDetailView(LoginRequiredMixin, DetailView):
+    model = Post
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
