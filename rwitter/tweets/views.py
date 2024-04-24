@@ -1,17 +1,13 @@
 from typing import Optional
-from django.forms.models import BaseModelForm
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .forms import SearchHistoryForm, FeedbackForm, StoryForm, CommentForm
 from .models import SearchHistory, Post, Feedback, Story, Comment
 from ads.models import Ads
 
 from rwitter.functions import handle_uploaded_file
-
-from users.models import UserProfile
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.db.models import Q
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
