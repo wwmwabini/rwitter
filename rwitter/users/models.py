@@ -1,9 +1,7 @@
-import secrets, os
 
 from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
-from rwitter.functions import random_photo_name, handle_uploaded_file
 
 default_profile_image_folder = 'media/images/profile_pics'
 

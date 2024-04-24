@@ -1,11 +1,8 @@
-import os
 
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import FileExtensionValidator, ValidationError
+from django.core.validators import FileExtensionValidator
 from django.urls import reverse
-from PIL import Image
-from rwitter.functions import random_image_name
 
 
 default_post_image_folder='media/images/post_pics'

@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from .models import UserProfile
 from django.core.exceptions import ValidationError
-from bootstrap_datepicker_plus.widgets import DatePickerInput, MonthPickerInput, YearPickerInput
+from bootstrap_datepicker_plus.widgets import DatePickerInput
 
 def validate_email(form_email):
     if User.objects.filter(email = form_email).exists():
